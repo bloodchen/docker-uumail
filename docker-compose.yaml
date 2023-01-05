@@ -1,0 +1,10 @@
+version: '2'
+services:
+  uumail:
+    image: bloodchen/uumail:latest
+    container_name: uumail
+    restart: always
+    volumes:
+      - ./config:/config
+    ports:
+      - 25:25
