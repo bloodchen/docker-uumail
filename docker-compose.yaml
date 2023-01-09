@@ -4,7 +4,13 @@ services:
     image: bloodchen/uumail:latest
     container_name: uumail
     restart: always
+    environment:
+      - "DKIM_DOMAIN=pi.skyjeff.com"
+      - "DKIM_SELECTOR=mail"
     volumes:
       - ./config:/config
+      - "./config/certs/fullchain.pem:/etc/ssl/certs/fullchain.pem:ro"
+      - "./config/certs/privkey.pem:/etc/ssl/private/privkey.pem:ro"
     ports:
       - 25:25
+      - 587:587

@@ -9,10 +9,10 @@
 smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
 biff = no
 
-# test
 smtpd_milters = inet:116.87.168.233:20025
 #smtpd_milters = inet:127.0.0.1:20025
-non_smtpd_milters       = $smtpd_milters
+mua_milters = 
+non_smtpd_milters       = $mua_milters
 milter_default_action   = reject
 local_recipient_maps =
 relay_domains = pcre:/etc/postfix/mydestinations
@@ -33,8 +33,8 @@ compatibility_level = 2
 
 
 # TLS parameters
-smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
-smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+smtpd_tls_cert_file = /config/certs/fullchain.pem
+smtpd_tls_key_file = /config/certs/privkey.pem
 smtpd_tls_security_level=may
 
 smtp_tls_CApath=/etc/ssl/certs
