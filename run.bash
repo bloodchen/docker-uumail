@@ -38,6 +38,7 @@ echo
 chown -R opendkim:opendkim /etc/opendkim
 chmod -R 0700 /etc/opendkim/keys
 
+postmap /config/blacklist
 /usr/bin/supervisord -c /etc/supervisor.conf
 
 chmod 777 /var/spool/postfix/maildrop/

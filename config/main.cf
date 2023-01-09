@@ -12,7 +12,7 @@ biff = no
 smtpd_milters = inet:116.87.168.233:20025
 #smtpd_milters = inet:127.0.0.1:20025
 mua_milters = 
-non_smtpd_milters       = $mua_milters
+non_smtpd_milters       = $smtpd_milters
 milter_default_action   = reject
 local_recipient_maps =
 relay_domains = pcre:/etc/postfix/mydestinations
@@ -39,10 +39,10 @@ smtpd_tls_security_level=may
 
 smtp_tls_CApath=/etc/ssl/certs
 #smtp_tls_security_level=may
-smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+#smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
 
-smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
+smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination check_client_access cidr:/config/blacklist
 myhostname = nbsite.link
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
