@@ -1,0 +1,3 @@
+192.158.1.1           REJECT blocked single IP by my server
+192.158.2.0/24    REJECT blocked the whole network by my server
+mail.spamdomain.example REJECT blocked special host by my server
