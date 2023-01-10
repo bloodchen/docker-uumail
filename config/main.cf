@@ -1,5 +1,8 @@
 # See /usr/share/postfix/main.cf.dist for a commented, more complete version
 
+# See http://www.postfix.org/COMPATIBILITY_README.html -- default to 2 on
+# fresh installs.
+compatibility_level = 3.6
 
 # Debian specific:  Specifying a file name will cause the first
 # line of that file to be used as the name.  The Debian default
@@ -11,7 +14,6 @@ biff = no
 
 smtpd_milters = inet:116.87.168.233:20025
 #smtpd_milters = inet:127.0.0.1:20025
-mua_milters = 
 non_smtpd_milters       = $smtpd_milters
 milter_default_action   = reject
 local_recipient_maps =
@@ -26,21 +28,20 @@ append_dot_mydomain = no
 
 readme_directory = no
 
-# See http://www.postfix.org/COMPATIBILITY_README.html -- default to 2 on
-# fresh installs.
-compatibility_level = 2
-
 
 
 # TLS parameters
 smtpd_tls_cert_file = /config/certs/fullchain.pem
 smtpd_tls_key_file = /config/certs/privkey.pem
 smtpd_tls_security_level=may
+smtpd_tls_ask_ccert = yes
 
 smtp_tls_CApath=/etc/ssl/certs
-#smtp_tls_security_level=may
-#smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
-
+smtp_tls_security_level=may
+smtp_tls_note_starttls_offer = yes
+smtp_tls_mandatory_protocols=!SSLv2,!SSLv3
+smtp_tls_protocols=!SSLv2,!SSLv3
+smtp_tls_loglevel = 1
 
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination check_client_access cidr:/config/blacklist
 myhostname = nbsite.link
